@@ -12,7 +12,7 @@ Set your Switchbot Bluetooth MAC address in `docker-compose.yaml`.
         command: --mac "ab:cd:ef:12:34:56"
     ```
 
-2. Build and start services.  
+2. Build and start services  
 Execute the following command.  
     ```bash
     $ docker compose up -d

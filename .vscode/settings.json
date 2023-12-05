@@ -1,0 +1,26 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+  },
+  "flake8.path": ["${workspaceFolder}/switchbot-logger/.venv/bin/pflake8"],
+  "black-formatter.path": ["${workspaceFolder}/switchbot-logger/.venv/bin/black"],
+  "python.envFile": "${workspaceFolder}/switchbot-logger/.venv",
+  "python.defaultInterpreterPath": "${workspaceFolder}/switchbot-logger/.venv/bin/python",
+  "cSpell.words": [
+    "abatilo",
+    "errorcode",
+    "bluepy",
+    "btle",
+    "dbhandler",
+    "isort",
+    "levelname",
+    "pflake",
+    "pylambda",
+    "pytest",
+    "switchbot",
+  ],
+  }

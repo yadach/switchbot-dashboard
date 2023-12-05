@@ -2,13 +2,16 @@
 
 import argparse
 import logging
-from datetime import datetime, timezone
-import yaml
 import time
+from datetime import datetime
+from datetime import timezone
 
+import yaml
 from bluepy import btle
-from switchbot_logger.sensor import SwitchbotScanDelegate
+
 from switchbot_logger.logger import DBHandler
+from switchbot_logger.sensor import SwitchbotScanDelegate
+
 
 def get_arguments():
     """Parse arguments."""
@@ -39,8 +42,11 @@ def scan_and_logging(
         if scanner.delegate.sensorValue is not None:
             break
         else:
-            logging.warning("Scaning sensor data again...")
-    logging.info(f"Temperature: {scanner.delegate.sensorValue['Temperature']}, Humidity: {scanner.delegate.sensorValue['Humidity']}")
+            logging.warning("Scanning sensor data again...")
+    logging.info(
+        f"Temperature: {scanner.delegate.sensorValue['Temperature']}, "
+        f"Humidity: {scanner.delegate.sensorValue['Humidity']}"
+    )
     data = scanner.delegate.sensorValue
     data["Datetime"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
@@ -48,7 +54,7 @@ def scan_and_logging(
     strs = [key for key in data.keys()]
     columns = ", ".join(strs)
     vals = "%(" + ")s, %(".join(strs) + ")"
-    operation = (f"INSERT INTO {db_conf['table']} ({columns}) VALUES({vals}s)")
+    operation = f"INSERT INTO {db_conf['table']} ({columns}) VALUES({vals}s)"
     # insert data
     dbhandler = DBHandler(**db_conf)
     dbhandler.create_table(db_conf["table"])
@@ -70,8 +76,5 @@ if __name__ == "__main__":
     conf["MAC"] = args.mac
 
     while True:
-        scan_and_logging(
-            db_conf=conf["DB"],
-            mac=conf["MAC"]
-        )
+        scan_and_logging(db_conf=conf["DB"], mac=conf["MAC"])
         time.sleep(conf["Loop"]["sleep"])

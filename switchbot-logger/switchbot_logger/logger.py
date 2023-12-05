@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 
+
 class DBHandler(object):
     def __init__(
         self,
