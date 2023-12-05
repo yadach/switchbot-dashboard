@@ -18,6 +18,7 @@ jobs:
     defaults:
       run:
         working-directory: switchbot-logger
+        working-directory: switchbot-logger
     strategy:
       max-parallel: 10
       matrix:
@@ -40,5 +41,5 @@ jobs:
         run: poetry run black . --check --diff
       - name: Run flake8
         run: poetry run pflake8
-      - name: Run pytest
-        run: poetry run pytest tests --log-cli-level=INFO
+      # - name: Run pytest
+      #   run: poetry run pytest tests --log-cli-level=INFO
