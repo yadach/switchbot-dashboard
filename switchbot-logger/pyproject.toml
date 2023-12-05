@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "switchbot-logger"
+version = "0.1.0"
+description = "Logger for Switchbot sensors"
+authors = ["yadach <47210083+yadach@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "switchbot_logger"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+bluepy = "^1.3.0"
+pyyaml = "^6.0.1"
+mysql-connector-python = "^8.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

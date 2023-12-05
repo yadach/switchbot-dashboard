@@ -1,0 +1,10 @@
+DB:
+    host: "localhost"
+    port: "33306"
+    database: "switchbot-logs"
+    user: "grafana"
+    password: "grafana"
+    table: "sensors"
+
+Loop:
+    sleep: 300

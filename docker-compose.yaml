@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8.2.0
+    container_name: mysql-for-switchbot
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: switchbot-logs
+      MYSQL_USER: grafana
+      MYSQL_PASSWORD: grafana
+      TZ: 'Asia/Tokyo'
+    restart: always
+    volumes:
+      - ./mysql/db/data:/var/lib/mysql
+      - ./mysql/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 33306:3306/tcp
+
+  switchbot-logger:
+    build:
+      context: "./switchbot-logger"
+      dockerfile: "Dockerfile"
+    container_name: switchbot-logger
+    image: python-switchbot-logger:0.1.0
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: --mac "ab:cd:ef:12:34:56"
+    depends_on:
+      - mysql
+
+  grafana:
+    image: grafana/grafana-oss:10.2.2
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - ./grafana:/var/lib/grafana
+    ports:
+      # WebUI
+      - 33000:3000/tcp
+    depends_on:
+      - mysql
