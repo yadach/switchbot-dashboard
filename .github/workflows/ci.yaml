@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-22.04
     environment:
       name: test
+    defaults:
+      run:
+        working-directory: switchbot-logger
     strategy:
       max-parallel: 10
       matrix:
