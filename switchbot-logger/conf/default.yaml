@@ -7,4 +7,4 @@ DB:
   table: "sensors"
 
 Loop:
-  sleep: 300
+  sleep: 900
